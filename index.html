@@ -2654,3 +2654,50 @@
   </script>
 </body>
 </html>
+
+
+// index.html 맨 아래 추가
+<script>
+// 1. 저작권 경고
+console.log('%c⚠️ 경고!', 'color: red; font-size: 30px; font-weight: bold;');
+console.log('%c이 콘솔은 개발자용입니다. 코드를 복사하거나 수정하는 것은 저작권법 위반입니다.', 'color: red; font-size: 16px;');
+console.log('%cCopyright © 2025 Noplatea. All rights reserved.', 'color: blue; font-size: 14px;');
+
+// 2. 우클릭 방지
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// 3. 단축키 방지
+document.onkeydown = function(e) {
+    // F12, Ctrl+Shift+I, Ctrl+U 등 모두 차단
+    if(e.keyCode==123 || (e.ctrlKey && e.shiftKey && (e.keyCode==73 || e.keyCode==74)) || (e.ctrlKey && e.keyCode==85)) {
+        alert('이 페이지의 소스 코드는 저작권으로 보호됩니다.\n무단 복제 시 법적 조치를 취할 수 있습니다.\n\nCopyright © 2025 Noplatea');
+        return false;
+    }
+};
+
+// 4. 텍스트 선택 방지 (정보는 볼 수 있지만 복사 어렵게)
+document.body.style.userSelect = 'none';
+document.body.style.webkitUserSelect = 'none';
+document.body.style.msUserSelect = 'none';
+document.body.style.mozUserSelect = 'none';
+
+// 5. 이미지 드래그 방지
+document.ondragstart = function() { return false; };
+
+// 6. 개발자도구 열림 감지
+(function() {
+    const element = new Image();
+    let devtoolsOpen = false;
+    element.__defineGetter__('id', function() {
+        devtoolsOpen = true;
+        window.location.href = "about:blank";
+    });
+    setInterval(function() {
+        devtoolsOpen = false;
+        console.log(element);
+        if(devtoolsOpen) {
+            document.body.innerHTML = '<div style="text-align:center; margin-top:200px; font-family:Arial;"><h1>⛔ 접근 차단</h1><p>개발자 도구 사용이 감지되었습니다.</p><p>Copyright © 2025 Noplatea</p></div>';
+        }
+    }, 1000);
+})();
+</script>
